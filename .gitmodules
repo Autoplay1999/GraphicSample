@@ -1,0 +1,17 @@
+[submodule "imgui"]
+	path = imgui
+	url = https://github.com/ocornut/imgui.git
+	branch = docking
+[submodule "GraphicLib/imgui"]
+	path = GraphicLib/imgui
+	url = https://github.com/ocornut/imgui.git
+	branch = docking
+[submodule "GraphicLib/DirectXMesh"]
+	path = GraphicLib/DirectXMesh
+	url = https://github.com/microsoft/DirectXMesh.git
+[submodule "GraphicLib/stb"]
+	path = GraphicLib/stb
+	url = https://github.com/nothings/stb.git
+[submodule "GraphicLib/DirectXMath"]
+	path = GraphicLib/DirectXMath
+	url = https://github.com/microsoft/DirectXMath.git

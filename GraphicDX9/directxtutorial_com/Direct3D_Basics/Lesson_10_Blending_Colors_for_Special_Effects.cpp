@@ -1,0 +1,141 @@
+// include the basic windows header files and the Direct3D header file
+#include "../../header.h"
+#include <DirectXMath.h>
+
+using namespace DirectX;
+
+// global declarations
+HWND g_hWnd;
+LPDIRECT3DDEVICE9 g_d3ddev;    // the pointer to the device class
+LPDIRECT3DVERTEXBUFFER9 v_buffer = NULL;    // the pointer to the vertex buffer
+LPDIRECT3DINDEXBUFFER9 i_buffer = NULL;
+
+struct CUSTOMVERTEX { FLOAT X, Y, Z; DWORD COLOR; };
+#define CUSTOMFVF (D3DFVF_XYZ | D3DFVF_DIFFUSE)
+#define LIGHT 1
+
+static void set_light();
+
+// this is the function used to render a single frame
+void graphic_frame() {
+    // select which vertex format we are using
+    g_d3ddev->SetFVF(CUSTOMFVF);
+
+    // set the view transform
+    XMVECTOR cameraPos, lookAtPos, upDirection;
+
+    // set an ever-increasing float value
+    static float index = 0.0f; index += 0.03f;
+
+    cameraPos.m128_f32[0] = sin(index) * 20.0f;
+    cameraPos.m128_f32[1] = 2.0f;
+    cameraPos.m128_f32[2] = 25.0f;
+    cameraPos.m128_f32[3] = 1.0f;
+
+    lookAtPos.m128_f32[0] = 0.0f;
+    lookAtPos.m128_f32[1] = 0.0f;
+    lookAtPos.m128_f32[2] = 0.0f;
+    lookAtPos.m128_f32[3] = 1.0f;
+
+    upDirection.m128_f32[0] = 0.0f;
+    upDirection.m128_f32[1] = 1.0f;
+    upDirection.m128_f32[2] = 0.0f;
+    upDirection.m128_f32[3] = 1.0f;
+
+    auto matView = XMMatrixLookAtLH(
+        cameraPos,    // the camera position
+        lookAtPos,    // the look-at position
+        upDirection   // the up direction
+    );
+
+    g_d3ddev->SetTransform(D3DTS_VIEW, (D3DMATRIX*)&matView);    // set the view transform to matView
+
+    // set the projection transform
+    auto matProjection = XMMatrixPerspectiveFovLH(
+        XM_PIDIV4,    // the horizontal field of view
+        1024.0f / 768.0f, // aspect ratio
+        1.0f,    // the near view-plane
+        100.0f
+    );    // the far view-plane
+
+    g_d3ddev->SetTransform(D3DTS_PROJECTION, (D3DMATRIX*)&matProjection);     // set the projection
+
+    // set the stream source
+    g_d3ddev->SetStreamSource(0, v_buffer, 0, sizeof(CUSTOMVERTEX));
+
+    // set the first world transform
+    auto matTranslate = XMMatrixTranslation(0.0f, 0.0f, -10.0f);
+    g_d3ddev->SetTransform(D3DTS_WORLD, (D3DMATRIX*)&matTranslate);    // set the world transform
+
+    // draw the first square
+    g_d3ddev->DrawPrimitive(D3DPT_TRIANGLESTRIP, 0, 2);
+
+    // set the second world transform
+    matTranslate = XMMatrixTranslation(0.0f, 0.0f, 0.0f);
+    g_d3ddev->SetTransform(D3DTS_WORLD, (D3DMATRIX*)&matTranslate);    // set the world transform
+
+    // draw the second square
+    g_d3ddev->DrawPrimitive(D3DPT_TRIANGLESTRIP, 4, 2);
+}
+
+void graphic_ui() {
+
+}
+
+void graphic_state() {
+    g_d3ddev->SetRenderState(D3DRS_LIGHTING, FALSE);    // turn off the 3D lighting
+    g_d3ddev->SetRenderState(D3DRS_ZENABLE, TRUE);    // turn on the z-buffer
+
+    g_d3ddev->SetRenderState(D3DRS_ALPHABLENDENABLE, TRUE);    // turn on the color blending
+    g_d3ddev->SetRenderState(D3DRS_SRCBLEND, D3DBLEND_SRCALPHA);    // set source factor
+    g_d3ddev->SetRenderState(D3DRS_DESTBLEND, D3DBLEND_INVSRCALPHA);    // set dest factor
+    g_d3ddev->SetRenderState(D3DRS_BLENDOP, D3DBLENDOP_ADD);    // set the operation
+}
+
+// this is the function that puts the 3D models into video RAM
+bool graphic_init(HWND hWnd, IDirect3DDevice9* device) {
+    g_hWnd = hWnd;
+    g_d3ddev = device;
+
+    // create the vertices using the CUSTOMVERTEX struct
+    CUSTOMVERTEX vertices[] =
+    {
+        // square 1
+        { -3.0f, 3.0f, 3.0f, D3DCOLOR_ARGB(255, 0, 0, 255), },
+        { -3.0f, -3.0f, 3.0f, D3DCOLOR_ARGB(255, 0, 255, 0), },
+        { 3.0f, 3.0f, 3.0f, D3DCOLOR_ARGB(255, 255, 0, 0), },
+        { 3.0f, -3.0f, 3.0f, D3DCOLOR_ARGB(255, 0, 255, 255), },
+
+        // square 2
+        { -3.0f, 3.0f, 3.0f, D3DCOLOR_ARGB(192, 0, 0, 255), },
+        { -3.0f, -3.0f, 3.0f, D3DCOLOR_ARGB(192, 0, 255, 0), },
+        { 3.0f, 3.0f, 3.0f, D3DCOLOR_ARGB(192, 255, 0, 0), },
+        { 3.0f, -3.0f, 3.0f, D3DCOLOR_ARGB(192, 0, 255, 255), },
+    };
+
+    // create a vertex buffer interface called v_buffer
+    g_d3ddev->CreateVertexBuffer(8 * sizeof(CUSTOMVERTEX),
+        0,
+        CUSTOMFVF,
+        D3DPOOL_MANAGED,
+        &v_buffer,
+        NULL);
+
+    VOID* pVoid;    // a void pointer
+
+    // lock v_buffer and load the vertices into it
+    v_buffer->Lock(0, 0, (void**)&pVoid, 0);
+    memcpy(pVoid, vertices, sizeof(vertices));
+    v_buffer->Unlock();
+
+    return true;
+}
+
+void graphic_wndproc(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam) {
+
+}
+
+// this is the function that cleans up Direct3D and COM
+void graphic_cleanup(void) {
+    v_buffer->Release();    // close and release the vertex buffer
+}

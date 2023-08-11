@@ -1,0 +1,93 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Source Files">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cc;cxx;c++;cppm;ixx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+    <Filter Include="Header Files">
+      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
+      <Extensions>h;hh;hpp;hxx;h++;hm;inl;inc;ipp;xsd</Extensions>
+    </Filter>
+    <Filter Include="Resource Files">
+      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
+      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
+    </Filter>
+    <Filter Include="Source Files\directxtutorial.com">
+      <UniqueIdentifier>{e7110b2b-1b33-4a0b-8911-9869dd26962a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\directxtutorial.com\Direct3D Basics">
+      <UniqueIdentifier>{1303ca43-c846-4147-bb95-80a845239a31}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\directxtutorial.com\Direct3D Textures">
+      <UniqueIdentifier>{4c6d5ffe-5c0d-4953-bce2-1ce7790ae1fc}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\directxtutorial.com\Direct3D Meshes">
+      <UniqueIdentifier>{bf069648-5fb9-4fae-bc35-106bd0eae169}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\directxtutorial.com\Game Display">
+      <UniqueIdentifier>{92299384-9fa5-42a8-9ce9-758ba0069f8b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\directxtutorial.com\Game Input">
+      <UniqueIdentifier>{8006be3a-1604-4de2-a648-cc6589f7be8b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\directxtutorial.com\Advanced Effects">
+      <UniqueIdentifier>{943d189f-a0f9-4774-a7c6-ead79dedd900}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\directxtutorial.com\Particle Engines">
+      <UniqueIdentifier>{a310ff78-4072-4e8b-9d3e-e9d2b4faa2d8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\directxtutorial.com\Multiplayer">
+      <UniqueIdentifier>{e949f998-8a65-4688-9fc4-849b5a480967}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="header.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="stb_image.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="mesh_loader.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="main.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="directxtutorial_com\Direct3D_Basics\Lesson_4_Drawing_a_Triangle.cpp">
+      <Filter>Source Files\directxtutorial.com\Direct3D Basics</Filter>
+    </ClCompile>
+    <ClCompile Include="directxtutorial_com\Direct3D_Basics\Lesson_5_Transforming_Vertices.cpp">
+      <Filter>Source Files\directxtutorial.com\Direct3D Basics</Filter>
+    </ClCompile>
+    <ClCompile Include="directxtutorial_com\Direct3D_Basics\Lesson_6_Rendering_Depth.cpp">
+      <Filter>Source Files\directxtutorial.com\Direct3D Basics</Filter>
+    </ClCompile>
+    <ClCompile Include="directxtutorial_com\Direct3D_Basics\Lesson_7_Simple_Modeling.cpp">
+      <Filter>Source Files\directxtutorial.com\Direct3D Basics</Filter>
+    </ClCompile>
+    <ClCompile Include="directxtutorial_com\Direct3D_Basics\Lesson_8_Rendering_with_Vertex_Lighting.cpp">
+      <Filter>Source Files\directxtutorial.com\Direct3D Basics</Filter>
+    </ClCompile>
+    <ClCompile Include="directxtutorial_com\Direct3D_Basics\Lesson_9_More_on_Lighting.cpp">
+      <Filter>Source Files\directxtutorial.com\Direct3D Basics</Filter>
+    </ClCompile>
+    <ClCompile Include="directxtutorial_com\Direct3D_Basics\Lesson_10_Blending_Colors_for_Special_Effects.cpp">
+      <Filter>Source Files\directxtutorial.com\Direct3D Basics</Filter>
+    </ClCompile>
+    <ClCompile Include="directxtutorial_com\Direct3D_Textures\Lesson_1_Adding_Textures.cpp">
+      <Filter>Source Files\directxtutorial.com\Direct3D Textures</Filter>
+    </ClCompile>
+    <ClCompile Include="directxtutorial_com\Direct3D_Textures\Lesson_2_Texture_Filtering.cpp">
+      <Filter>Source Files\directxtutorial.com\Direct3D Textures</Filter>
+    </ClCompile>
+    <ClCompile Include="directxtutorial_com\Particle_Engines\Lesson_2_A_Simple_Billboard.cpp">
+      <Filter>Source Files\directxtutorial.com\Particle Engines</Filter>
+    </ClCompile>
+    <ClCompile Include="directxtutorial_com\Game_Input\Lesson_1_Simple_Input.cpp">
+      <Filter>Source Files\directxtutorial.com\Game Input</Filter>
+    </ClCompile>
+  </ItemGroup>
+</Project>
