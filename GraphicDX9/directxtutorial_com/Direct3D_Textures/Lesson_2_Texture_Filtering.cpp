@@ -1,8 +1,5 @@
 // include the basic windows header files and the Direct3D header file
 #include "../../header.h"
-#include <DirectXMath.h>
-#define STB_IMAGE_IMPLEMENTATION
-#include "../../stb_image.h"
 
 using namespace DirectX;
 namespace fs = std::filesystem;

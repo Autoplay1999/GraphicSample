@@ -75,9 +75,9 @@ int main(int, char**) {
             ResetDevice();
         }
 
-        ImGui_Begin();
+        ImGui_BeginFrame();
         graphic_ui();
-        ImGui_End();
+        ImGui_EndFrame();
 
         g_pd3dDevice->SetRenderState(D3DRS_ZENABLE, FALSE);
         g_pd3dDevice->SetRenderState(D3DRS_ALPHABLENDENABLE, FALSE);
@@ -162,11 +162,11 @@ void CleanupDeviceD3D() {
 }
 
 void ResetDevice() {
-    ImGui_ImplDX9_InvalidateDeviceObjects();
+    ImGui_OnDeviceLost();
     HRESULT hr = g_pd3dDevice->Reset(&g_d3dpp);
     if (hr == D3DERR_INVALIDCALL)
         IM_ASSERT(0);
-    ImGui_ImplDX9_CreateDeviceObjects();
+    ImGui_OnDeviceReset();
 }
 
 // Forward declare message handler from imgui_impl_win32.cpp

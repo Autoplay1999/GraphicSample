@@ -7,6 +7,22 @@
 
 #include "framework.h"
 
+//#ifndef STB_IMAGE_IMPLEMENTATION
+//#   define STB_IMAGE_STATIC
+//#endif
+
+#define STB_IMAGE_IMPLEMENTATION
+#define STB_IMAGE_STATIC
+#include "stb/stb_image.h"
+
+#include <DirectXMath.h>
+#include <DirectXPackedVector.h>
+
+//#ifdef INC_DIRECTXMESH
+#   include "DirectXMesh/DirectXMesh/DirectXMesh.h"
+#   include "DirectXMesh/Meshconvert/Mesh.h"
+//#endif
+
 #ifdef BACKEND
 #   if BACKEND >= BACKEND_DX9 && BACKEND <= BACKEND_DX12
 #       include <dxgi.h>
@@ -26,17 +42,16 @@
 #   endif
 #endif
 
-// ImGui
 #ifdef INC_IMGUI
 #   include "imgui/imgui.h"
 #   include "imgui/imgui_internal.h"
-#   include "imgui/imgui_wrapper.h"
 #   ifdef BACKEND
 #       if BACKEND >= BACKEND_DX9 && BACKEND <= BACKEND_DX12
 #           include "imgui/backends/imgui_impl_win32.h"
 #       endif
 #       if BACKEND == BACKEND_DX9
 #           include "imgui/backends/imgui_impl_dx9.h"
+#           define IMGUI_BACKEND_DX9
 #       elif BACKEND == BACKEND_DX10
 #           include "imgui/backends/imgui_impl_dx10.h"
 #       elif BACKEND == BACKEND_DX11
@@ -45,4 +60,6 @@
 #           include "imgui/backends/imgui_impl_dx12.h"
 #       endif
 #   endif
+#   include "imgui_wrapper/imgui_wrapper.h"
 #endif
+

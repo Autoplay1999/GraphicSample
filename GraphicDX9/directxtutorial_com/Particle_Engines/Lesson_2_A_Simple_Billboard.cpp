@@ -1,9 +1,5 @@
 // include the basic windows header files and the Direct3D header file
 #include "../../header.h"
-#include <DirectXMath.h>
-#include <DirectXPackedVector.h>
-#define STB_IMAGE_IMPLEMENTATION
-#include "../../stb_image.h"
 
 using namespace DirectX;
 using namespace DirectX::PackedVector;

@@ -1,8 +1,5 @@
 // include the basic windows header files and the Direct3D header file
 #include "../../header.h"
-#include "../../mesh_loader.h"
-#include "../../WaveFrontReader.h"
-#include <DirectXMath.h>
 
 using namespace DirectX;
 

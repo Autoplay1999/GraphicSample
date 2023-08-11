@@ -43,6 +43,30 @@
     <Filter Include="Source Files\DirectX\Mesh">
       <UniqueIdentifier>{57ae0645-3b9f-4c33-8491-b7fe7c3fc087}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source Files\DirectX\Mesh\DirectXMesh">
+      <UniqueIdentifier>{1da3dab6-f547-4951-a1ba-e7bdfa5bb3b1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\DirectX\Mesh\Meshconvert">
+      <UniqueIdentifier>{4d8386cb-9264-4e34-9eb1-0bbf316361ee}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\DirectX">
+      <UniqueIdentifier>{00fcb255-745a-40e2-877e-8c5af0421937}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\DirectX\Mesh">
+      <UniqueIdentifier>{c1a6c0a8-8219-46f1-b9e9-9cea02bacd92}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\DirectX\Mesh\DirectXMesh">
+      <UniqueIdentifier>{4dc7868d-85d0-485e-9a24-24ef3be0e865}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\DirectX\Mesh\Meshconvert">
+      <UniqueIdentifier>{b04711de-2139-479d-a51f-fd73b1d65fe3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\DirectX\Mesh\Utilities">
+      <UniqueIdentifier>{904f0d31-dd1a-4691-a46e-fd7c1f48f89a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\imgui_wrapper">
+      <UniqueIdentifier>{51c5e9f5-edc1-47da-b42d-2654c4afa3a2}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="framework.h">
@@ -135,11 +159,29 @@
     <ClInclude Include="imgui\imgui_wrapper.h">
       <Filter>Header Files\imgui</Filter>
     </ClInclude>
-    <ClInclude Include="directx\mesh\Meshconvert\Mesh.h">
-      <Filter>Source Files\DirectX\Mesh</Filter>
+    <ClInclude Include="DirectXMesh\Meshconvert\Mesh.h">
+      <Filter>Header Files\DirectX\Mesh\Meshconvert</Filter>
     </ClInclude>
-    <ClInclude Include="directx\mesh\Meshconvert\SDKMesh.h">
-      <Filter>Source Files\DirectX\Mesh</Filter>
+    <ClInclude Include="DirectXMesh\Meshconvert\SDKMesh.h">
+      <Filter>Header Files\DirectX\Mesh\Meshconvert</Filter>
+    </ClInclude>
+    <ClInclude Include="DirectXMesh\Utilities\FlexibleVertexFormat.h">
+      <Filter>Header Files\DirectX\Mesh\Utilities</Filter>
+    </ClInclude>
+    <ClInclude Include="DirectXMesh\Utilities\WaveFrontReader.h">
+      <Filter>Header Files\DirectX\Mesh\Utilities</Filter>
+    </ClInclude>
+    <ClInclude Include="DirectXMesh\DirectXMesh\DirectXMesh.h">
+      <Filter>Header Files\DirectX\Mesh\DirectXMesh</Filter>
+    </ClInclude>
+    <ClInclude Include="DirectXMesh\DirectXMesh\DirectXMeshP.h">
+      <Filter>Header Files\DirectX\Mesh\DirectXMesh</Filter>
+    </ClInclude>
+    <ClInclude Include="DirectXMesh\DirectXMesh\scoped.h">
+      <Filter>Header Files\DirectX\Mesh\DirectXMesh</Filter>
+    </ClInclude>
+    <ClInclude Include="imgui_wrapper\imgui_wrapper.h">
+      <Filter>Header Files\imgui_wrapper</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -212,17 +254,64 @@
     <ClCompile Include="imgui\misc\cpp\imgui_stdlib.cpp">
       <Filter>Source Files\ImGui\misc\cpp</Filter>
     </ClCompile>
-    <ClCompile Include="imgui\imgui_wrapper.cpp">
-      <Filter>Source Files\ImGui</Filter>
+    <ClCompile Include="DirectXMesh\Meshconvert\Mesh.cpp">
+      <Filter>Source Files\DirectX\Mesh\Meshconvert</Filter>
     </ClCompile>
-    <ClCompile Include="directx\mesh\Meshconvert\Mesh.cpp">
-      <Filter>Source Files\DirectX\Mesh</Filter>
+    <ClCompile Include="DirectXMesh\Meshconvert\MeshOBJ.cpp">
+      <Filter>Source Files\DirectX\Mesh\Meshconvert</Filter>
     </ClCompile>
-    <ClCompile Include="directx\mesh\Meshconvert\Meshconvert.cpp">
-      <Filter>Source Files\DirectX\Mesh</Filter>
+    <ClCompile Include="DirectXMesh\DirectXMesh\DirectXMeshAdjacency.cpp">
+      <Filter>Source Files\DirectX\Mesh\DirectXMesh</Filter>
     </ClCompile>
-    <ClCompile Include="directx\mesh\Meshconvert\MeshOBJ.cpp">
-      <Filter>Source Files\DirectX\Mesh</Filter>
+    <ClCompile Include="DirectXMesh\DirectXMesh\DirectXMeshClean.cpp">
+      <Filter>Source Files\DirectX\Mesh\DirectXMesh</Filter>
     </ClCompile>
+    <ClCompile Include="DirectXMesh\DirectXMesh\DirectXMeshConcat.cpp">
+      <Filter>Source Files\DirectX\Mesh\DirectXMesh</Filter>
+    </ClCompile>
+    <ClCompile Include="DirectXMesh\DirectXMesh\DirectXMeshGSAdjacency.cpp">
+      <Filter>Source Files\DirectX\Mesh\DirectXMesh</Filter>
+    </ClCompile>
+    <ClCompile Include="DirectXMesh\DirectXMesh\DirectXMeshletGenerator.cpp">
+      <Filter>Source Files\DirectX\Mesh\DirectXMesh</Filter>
+    </ClCompile>
+    <ClCompile Include="DirectXMesh\DirectXMesh\DirectXMeshNormals.cpp">
+      <Filter>Source Files\DirectX\Mesh\DirectXMesh</Filter>
+    </ClCompile>
+    <ClCompile Include="DirectXMesh\DirectXMesh\DirectXMeshOptimize.cpp">
+      <Filter>Source Files\DirectX\Mesh\DirectXMesh</Filter>
+    </ClCompile>
+    <ClCompile Include="DirectXMesh\DirectXMesh\DirectXMeshOptimizeLRU.cpp">
+      <Filter>Source Files\DirectX\Mesh\DirectXMesh</Filter>
+    </ClCompile>
+    <ClCompile Include="DirectXMesh\DirectXMesh\DirectXMeshOptimizeTVC.cpp">
+      <Filter>Source Files\DirectX\Mesh\DirectXMesh</Filter>
+    </ClCompile>
+    <ClCompile Include="DirectXMesh\DirectXMesh\DirectXMeshRemap.cpp">
+      <Filter>Source Files\DirectX\Mesh\DirectXMesh</Filter>
+    </ClCompile>
+    <ClCompile Include="DirectXMesh\DirectXMesh\DirectXMeshTangentFrame.cpp">
+      <Filter>Source Files\DirectX\Mesh\DirectXMesh</Filter>
+    </ClCompile>
+    <ClCompile Include="DirectXMesh\DirectXMesh\DirectXMeshUtil.cpp">
+      <Filter>Source Files\DirectX\Mesh\DirectXMesh</Filter>
+    </ClCompile>
+    <ClCompile Include="DirectXMesh\DirectXMesh\DirectXMeshValidate.cpp">
+      <Filter>Source Files\DirectX\Mesh\DirectXMesh</Filter>
+    </ClCompile>
+    <ClCompile Include="DirectXMesh\DirectXMesh\DirectXMeshVBReader.cpp">
+      <Filter>Source Files\DirectX\Mesh\DirectXMesh</Filter>
+    </ClCompile>
+    <ClCompile Include="DirectXMesh\DirectXMesh\DirectXMeshVBWriter.cpp">
+      <Filter>Source Files\DirectX\Mesh\DirectXMesh</Filter>
+    </ClCompile>
+    <ClCompile Include="DirectXMesh\DirectXMesh\DirectXMeshWeldVertices.cpp">
+      <Filter>Source Files\DirectX\Mesh\DirectXMesh</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="DirectXMesh\DirectXMesh\DirectXMesh.inl">
+      <Filter>Header Files\DirectX\Mesh\DirectXMesh</Filter>
+    </None>
   </ItemGroup>
 </Project>

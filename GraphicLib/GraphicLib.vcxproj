@@ -183,8 +183,13 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClInclude Include="directx\mesh\Meshconvert\Mesh.h" />
-    <ClInclude Include="directx\mesh\Meshconvert\SDKMesh.h" />
+    <ClInclude Include="DirectXMesh\DirectXMesh\DirectXMesh.h" />
+    <ClInclude Include="DirectXMesh\DirectXMesh\DirectXMeshP.h" />
+    <ClInclude Include="DirectXMesh\DirectXMesh\scoped.h" />
+    <ClInclude Include="DirectXMesh\Meshconvert\Mesh.h" />
+    <ClInclude Include="DirectXMesh\Meshconvert\SDKMesh.h" />
+    <ClInclude Include="DirectXMesh\Utilities\FlexibleVertexFormat.h" />
+    <ClInclude Include="DirectXMesh\Utilities\WaveFrontReader.h" />
     <ClInclude Include="framework.h" />
     <ClInclude Include="header.h" />
     <ClInclude Include="imgui\backends\imgui_impl_allegro5.h" />
@@ -215,11 +220,27 @@
     <ClInclude Include="imgui\imstb_textedit.h" />
     <ClInclude Include="imgui\imstb_truetype.h" />
     <ClInclude Include="imgui\misc\cpp\imgui_stdlib.h" />
+    <ClInclude Include="imgui_wrapper\imgui_wrapper.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="directx\mesh\Meshconvert\Mesh.cpp" />
-    <ClCompile Include="directx\mesh\Meshconvert\Meshconvert.cpp" />
-    <ClCompile Include="directx\mesh\Meshconvert\MeshOBJ.cpp" />
+    <ClCompile Include="DirectXMesh\DirectXMesh\DirectXMeshAdjacency.cpp" />
+    <ClCompile Include="DirectXMesh\DirectXMesh\DirectXMeshClean.cpp" />
+    <ClCompile Include="DirectXMesh\DirectXMesh\DirectXMeshConcat.cpp" />
+    <ClCompile Include="DirectXMesh\DirectXMesh\DirectXMeshGSAdjacency.cpp" />
+    <ClCompile Include="DirectXMesh\DirectXMesh\DirectXMeshletGenerator.cpp" />
+    <ClCompile Include="DirectXMesh\DirectXMesh\DirectXMeshNormals.cpp" />
+    <ClCompile Include="DirectXMesh\DirectXMesh\DirectXMeshOptimize.cpp" />
+    <ClCompile Include="DirectXMesh\DirectXMesh\DirectXMeshOptimizeLRU.cpp" />
+    <ClCompile Include="DirectXMesh\DirectXMesh\DirectXMeshOptimizeTVC.cpp" />
+    <ClCompile Include="DirectXMesh\DirectXMesh\DirectXMeshRemap.cpp" />
+    <ClCompile Include="DirectXMesh\DirectXMesh\DirectXMeshTangentFrame.cpp" />
+    <ClCompile Include="DirectXMesh\DirectXMesh\DirectXMeshUtil.cpp" />
+    <ClCompile Include="DirectXMesh\DirectXMesh\DirectXMeshValidate.cpp" />
+    <ClCompile Include="DirectXMesh\DirectXMesh\DirectXMeshVBReader.cpp" />
+    <ClCompile Include="DirectXMesh\DirectXMesh\DirectXMeshVBWriter.cpp" />
+    <ClCompile Include="DirectXMesh\DirectXMesh\DirectXMeshWeldVertices.cpp" />
+    <ClCompile Include="DirectXMesh\Meshconvert\Mesh.cpp" />
+    <ClCompile Include="DirectXMesh\Meshconvert\MeshOBJ.cpp" />
     <ClCompile Include="imgui\backends\imgui_impl_allegro5.cpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
@@ -317,8 +338,10 @@
     <ClCompile Include="imgui\imgui_draw.cpp" />
     <ClCompile Include="imgui\imgui_tables.cpp" />
     <ClCompile Include="imgui\imgui_widgets.cpp" />
-    <ClCompile Include="imgui\imgui_wrapper.cpp" />
     <ClCompile Include="imgui\misc\cpp\imgui_stdlib.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="DirectXMesh\DirectXMesh\DirectXMesh.inl" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
