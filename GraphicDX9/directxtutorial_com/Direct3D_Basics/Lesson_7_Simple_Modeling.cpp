@@ -55,9 +55,6 @@ void graphic_frame() {
 
     g_d3ddev->SetTransform(D3DTS_PROJECTION, (D3DMATRIX*)&matProjection);     // set the projection
 
-    // select the vertex buffer to display
-    g_d3ddev->SetStreamSource(0, v_buffer, 0, sizeof(CUSTOMVERTEX));
-
     // set the world transform
     static float index = 0.0f; index += 0.03f; // an ever-increasing float value
     auto matRotateY = XMMatrixRotationY(index);    // the rotation matrix

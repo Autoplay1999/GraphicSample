@@ -29,7 +29,7 @@ void graphic_frame();
 void graphic_ui();
 void graphic_state();
 void graphic_cleanup();
-void graphic_wndproc(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam);
+bool graphic_wndproc(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam);
 
 // Main code
 int main(int, char**) {
@@ -178,7 +178,8 @@ extern IMGUI_IMPL_API LRESULT ImGui_ImplWin32_WndProcHandler(HWND hWnd, UINT msg
 // - When io.WantCaptureKeyboard is true, do not dispatch keyboard input data to your main application, or clear/overwrite your copy of the keyboard data.
 // Generally you may always pass all inputs to dear imgui, and hide them from your application based on those two flags.
 LRESULT WINAPI WndProc(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam) {
-    graphic_wndproc(hWnd, msg, wParam, lParam);
+    if (!graphic_wndproc(hWnd, msg, wParam, lParam))
+        return true;
     
     if (ImGui_ImplWin32_WndProcHandler(hWnd, msg, wParam, lParam))
         return true;

@@ -16,6 +16,7 @@ XMFLOAT4 g_WndRect;
 
 // function prototypes
 void init_light(void);
+void init_input(HWND hWnd);
 void update_window_rect();
 
 // this is the function used to render a single frame
@@ -31,7 +32,7 @@ void graphic_frame() {
         cameraPos,    // the camera position
         lookAtPos,      // the look-at position
         upDirection // the up direction
-    );    
+    );
     g_d3ddev->SetTransform(D3DTS_VIEW, (D3DXMATRIX*)&matView);
 
     // set the projection transform
@@ -44,25 +45,8 @@ void graphic_frame() {
 
     g_d3ddev->SetTransform(D3DTS_PROJECTION, (D3DMATRIX*)&matProjection);     // set the projection
 
-    static float index = 0.0f; // index+=0.03f;
-
-    if (g_IsActive) {
-        // collect keyboard data
-        if (KEY_DOWN(VK_LEFT)) index -= 0.03f;
-        if (KEY_DOWN(VK_RIGHT)) index += 0.03f;
-
-        // collect mouse data
-        POINT zero_point{};
-        ClientToScreen(g_hWnd, &zero_point);
-        GetCursorPos(&MousePos);    // get the mouse data
-        SetCursorPos(zero_point.x + (int)g_WndRect.z / 2, zero_point.y + (int)g_WndRect.w / 2);    // move the mouse to the center
-        MousePos.x -= zero_point.x + g_WndRect.z / 2;
-        MousePos.y -= zero_point.y + g_WndRect.w / 2;
-        index += MousePos.x * 0.01f;
-    }
-
     // set the world transform
-    auto matRotateY = XMMatrixRotationY(index);
+    auto matRotateY = XMMatrixRotationY(-(float)MousePos.x * 0.01f);
     g_d3ddev->SetTransform(D3DTS_WORLD, (D3DMATRIX*)&matRotateY);
 
     // draw the teapot
@@ -95,32 +79,50 @@ bool graphic_init(HWND hWnd, LPDIRECT3DDEVICE9 device) {
     g_hWnd = hWnd;
     g_d3ddev = device;
 
+    init_input(hWnd);
+
     D3DXCreateTeapot(g_d3ddev, &meshTeapot, NULL);    // create the teapot
     return true;
 }
 
 bool graphic_wndproc(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam) {
     switch (msg) {
+    case WM_INPUT:
+    {
+        RAWINPUT InputData;
+
+        UINT DataSize = sizeof(RAWINPUT);
+        GetRawInputData((HRAWINPUT)lParam,
+            RID_INPUT,
+            &InputData,
+            &DataSize,
+            sizeof(RAWINPUTHEADER));
+
+        // set the mouse button status
+        static BOOL MouseDown;
+        if (InputData.data.mouse.usButtonFlags == RI_MOUSE_LEFT_BUTTON_DOWN)
+            MouseDown = TRUE;
+        if (InputData.data.mouse.usButtonFlags == RI_MOUSE_LEFT_BUTTON_UP)
+            MouseDown = FALSE;
+
+        // rotate the teapot
+        if (MouseDown)
+            MousePos.x += InputData.data.mouse.lLastX;
+
+        break;
+    }
+
     case WM_KEYUP:
         if (wParam == VK_ESCAPE)
             PostQuitMessage(0);
         break;
 
     case WM_SETFOCUS:
-        ShowCursor(FALSE);
         g_IsActive = true;
         break;
 
     case WM_KILLFOCUS:
-        ShowCursor(TRUE);
         g_IsActive = false;
-        break;
-
-    case WM_SETCURSOR:
-        if (LOWORD(lParam) == HTCLIENT) {
-            // If cursor is inside our client area, prevent changing the cursor
-            return FALSE;
-        }
         break;
     }
 
@@ -150,8 +152,19 @@ void init_light(void) {
 void update_window_rect() {
     RECT wndRect;
     GetClientRect(g_hWnd, &wndRect);
-    g_WndRect.x = wndRect.left;
-    g_WndRect.y = wndRect.top;
-    g_WndRect.z = wndRect.right;
-    g_WndRect.w = wndRect.bottom;
+    g_WndRect.x = (float)wndRect.left;
+    g_WndRect.y = (float)wndRect.top;
+    g_WndRect.z = (float)wndRect.right;
+    g_WndRect.w = (float)wndRect.bottom;
+}
+
+// this is the function that initializes the Raw Input API
+void init_input(HWND hWnd) {
+    RAWINPUTDEVICE Mouse;
+    Mouse.usUsage = 0x02;    // register mouse
+    Mouse.usUsagePage = 0x01;    // top-level mouse
+    Mouse.dwFlags = NULL;    // flags
+    Mouse.hwndTarget = hWnd;    // handle to a window
+
+    RegisterRawInputDevices(&Mouse, 1, sizeof(RAWINPUTDEVICE));    // register the device
 }
